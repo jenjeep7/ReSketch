@@ -36,17 +36,19 @@ class AuthenticationManager: ObservableObject {
         errorMessage = nil
         
         do {
-            // Check if username is available
+            // Create Firebase Auth user first
+            let result = try await auth.createUser(withEmail: email, password: password)
+            
+            // Now check if username is available (authenticated now)
             let usernameQuery = try await db.collection("users")
                 .whereField("username", isEqualTo: username)
                 .getDocuments()
             
             if !usernameQuery.documents.isEmpty {
+                // Username taken - delete the auth user we just created
+                try await result.user.delete()
                 throw NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Username already taken"])
             }
-            
-            // Create Firebase Auth user
-            let result = try await auth.createUser(withEmail: email, password: password)
             
             // Create user profile in Firestore
             let newUser = User(
