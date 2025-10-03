@@ -26,16 +26,22 @@ class ThreadManager: ObservableObject {
         errorMessage = nil
         
         do {
+            print("🔍 Fetching threads from Firestore...")
             let snapshot = try await db.collection("threads")
                 .order(by: "createdAt", descending: true)
                 .limit(to: limit)
                 .getDocuments()
             
+            print("📦 Fetched \(snapshot.documents.count) thread documents")
+            
             threads = snapshot.documents.compactMap { doc in
                 try? doc.data(as: Thread.self)
             }
             
+            print("✅ Successfully parsed \(threads.count) threads")
+            
         } catch {
+            print("❌ Error fetching threads: \(error.localizedDescription)")
             errorMessage = error.localizedDescription
         }
         
@@ -75,11 +81,13 @@ class ThreadManager: ObservableObject {
             )
             
             try threadRef.setData(from: thread)
+            print("✅ Thread document created with ID: \(threadRef.documentID)")
             
             // Update user's thread count
             try await db.collection("users").document(creatorID).updateData([
                 "threadCount": FieldValue.increment(Int64(1))
             ])
+            print("✅ Thread creation complete! Title: \(title)")
             
             isLoading = false
             return thread

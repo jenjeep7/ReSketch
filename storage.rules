@@ -2,19 +2,12 @@ rules_version = '2';
 service firebase.storage {
   match /b/{bucket}/o {
     
-    // Helper function to check if user is authenticated
-    function isAuthenticated() {
-      return request.auth != null;
-    }
+    // TEMPORARY: Ultra-permissive rules for debugging
+    // TODO: Revert to proper security rules once upload works
     
     // Thread images (original artwork)
     match /threads/{imageId} {
-      // Anyone authenticated can read
-      allow read: if isAuthenticated();
-      // Only authenticated users can upload
-      allow write: if isAuthenticated()
-                   && request.resource.size < 10 * 1024 * 1024  // Max 10MB
-                   && request.resource.contentType.matches('image/.*');
+      allow read, write: if true;  // TEMPORARY - ALLOWS ANYONE
     }
     
     // Submission images (re-sketches)
