@@ -1,77 +1,232 @@
-# ReSketch
+# ReSketch - Collaborative Drawing Platform
 
-A collaborative drawing app built with SwiftUI and PencilKit for iOS.
+A social platform for artists to share original drawings and create re-sketches (variations) of each other's work. Built with SwiftUI, PencilKit, and Firebase.
 
-## Features
+## 🎨 Features
 
-- **Full-screen PencilKit canvas** with Apple Pencil support (pressure, tilt, and low-latency drawing)
-- **System PKToolPicker** with brushes, markers, pencils, erasers, colors, and sizes
-- **Import seed photos** from your photo library to draw over
-- **Undo/Redo** support (two-finger tap gesture or through the tool picker)
-- **Save to Photos** - Export your drawings as images
-- **Share** your artwork via the system share sheet
-- **Palm rejection** toggle (Pencil-only or finger+Pencil modes)
+### Core Features
+- **User Authentication** - Email/password sign up and sign in
+- **Create Threads** - Upload or draw original artwork to start a thread
+- **Browse Feed** - Discover original artwork from other artists
+- **Re-Sketch** - Create your own version of someone's artwork with PencilKit
+- **View Submissions** - See all re-sketches for any thread
+- **Reference Mode** - Draw with the original artwork visible at adjustable opacity
 
-## Requirements
+### Drawing Features
+- Full-screen PencilKit canvas with Apple Pencil support
+- Pressure, tilt, and low-latency drawing
+- System PKToolPicker (brushes, markers, pencils, erasers)
+- Palm rejection toggle
+- Undo/Redo support
+- Save drawing data for replay (future feature)
 
-- iOS 16.0+
-- Xcode 15.0+
-- Swift 5.9+
-- iPad or iPhone (optimized for iPad with Apple Pencil)
-
-## Getting Started
-
-1. Clone this repository
-2. Open `ReSketch.xcodeproj` in Xcode
-3. Select your target device (iPad recommended for best experience)
-4. Build and run (⌘R)
-
-## Privacy Permissions
-
-The app requests the following permissions:
-
-- **Photo Library (Save)** - To save your drawings to Photos
-- **Photo Library (Access)** - To import seed images for drawing
-- **Camera** - To capture photos directly (optional feature)
-
-These are configured in the Info.plist automatically through the build settings.
-
-## Architecture
-
-### Key Files
-
-- `ReSketchApp.swift` - App entry point
-- `ContentView.swift` - Root navigation container
-- `DrawingScreen.swift` - Main canvas screen with toolbar and photo import
-- `PencilCanvasRepresentable.swift` - UIKit bridge for PencilKit canvas
-- `Assets.xcassets` - App icons and colors
+## 🏗️ Architecture
 
 ### Tech Stack
+- **Frontend**: SwiftUI (iOS 16+)
+- **Drawing**: PencilKit
+- **Backend**: Firebase
+  - Authentication
+  - Firestore (database)
+  - Cloud Storage (images)
+- **Language**: Swift 5.9+
 
-- **SwiftUI** - Modern declarative UI framework
-- **PencilKit** - Apple's high-performance drawing framework
-- **PhotosUI** - Photo picker integration
-- **AVFoundation** - Image aspect ratio utilities
+### Data Models
 
-## Roadmap
+**User**
+```swift
+- id: String (Firebase UID)
+- username: String (unique)
+- email: String
+- displayName: String
+- profileImageURL: String?
+- threadCount: Int
+- submissionCount: Int
+```
 
-- [ ] Firebase integration for collaborative threads
-- [ ] Real-time drawing synchronization
+**Thread** (Original Artwork)
+```swift
+- id: String
+- creatorID: String
+- creatorUsername: String
+- title: String
+- description: String?
+- originalImageURL: String
+- thumbnailURL: String?
+- submissionCount: Int
+- tags: [String]
+- createdAt: Date
+```
+
+**Submission** (Re-Sketch)
+```swift
+- id: String
+- threadID: String
+- artistID: String
+- artistUsername: String
+- imageURL: String
+- thumbnailURL: String?
+- likeCount: Int
+- commentCount: Int
+- drawingDataURL: String? (for replay)
+- createdAt: Date
+```
+
+### Project Structure
+```
+ReSketch/
+├── Models/
+│   ├── User.swift
+│   ├── Thread.swift
+│   └── Submission.swift
+├── Services/
+│   ├── AuthenticationManager.swift
+│   ├── ThreadManager.swift
+│   └── SubmissionManager.swift
+├── Views/
+│   ├── AuthenticationView.swift
+│   ├── FeedView.swift
+│   ├── ThreadDetailView.swift
+│   ├── CreateThreadView.swift
+│   ├── CreateArtworkCanvas.swift
+│   ├── ReSketchCanvasView.swift
+│   └── DrawingScreen.swift (original demo)
+├── PencilCanvasRepresentable.swift
+├── ContentView.swift
+├── ReSketchApp.swift
+└── Assets.xcassets/
+```
+
+## 🚀 Getting Started
+
+### Prerequisites
+- macOS with Xcode 15.0+
+- iOS 16.0+ device or simulator
+- Firebase account (free tier works)
+- Apple Developer account (for device testing)
+
+### Setup Instructions
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/jenjeep7/ReSketch.git
+   cd ReSketch
+   ```
+
+2. **Install Firebase SDK**
+   - Open `ReSketch.xcodeproj` in Xcode
+   - Go to File > Add Package Dependencies
+   - Add: `https://github.com/firebase/firebase-ios-sdk`
+   - Select: FirebaseAuth, FirebaseFirestore, FirebaseStorage
+
+3. **Configure Firebase**
+   - Follow instructions in `FIREBASE_SETUP.md`
+   - Download `GoogleService-Info.plist` from Firebase Console
+   - Add it to the Xcode project
+
+4. **Update Bundle Identifier**
+   - Select the ReSketch target
+   - Update Bundle Identifier to match your Firebase project
+   - Select your development team
+
+5. **Build and Run**
+   - Select an iPad simulator or device (recommended)
+   - Press ⌘R to build and run
+
+## 📱 User Flow
+
+1. **Sign Up / Sign In**
+   - Create account with email, username, display name, password
+   - Or sign in with existing credentials
+
+2. **Browse Feed**
+   - View all original artwork threads
+   - See thread titles, creators, re-sketch counts
+   - Tap a thread to view details
+
+3. **View Thread**
+   - See the original artwork full-size
+   - Browse all re-sketches in a grid
+   - Tap "Create Your Re-Sketch" to draw
+
+4. **Create Re-Sketch**
+   - Original artwork appears as reference (adjustable opacity)
+   - Draw your version using PencilKit tools
+   - Toggle reference visibility
+   - Submit when complete
+
+5. **Create New Thread**
+   - Choose to draw new artwork or upload from photos
+   - Add title, description, and tags
+   - Create thread to share with community
+
+## 🎯 Roadmap
+
+### Phase 1 - MVP (Current)
+- ✅ User authentication
+- ✅ Create threads (upload/draw)
+- ✅ Browse feed
+- ✅ Create re-sketches
+- ✅ View submissions
+
+### Phase 2 - Social Features
+- [ ] Like/favorite submissions
+- [ ] Comments on submissions
+- [ ] User profiles
+- [ ] Follow/followers system
+- [ ] Notifications
+
+### Phase 3 - Discovery
+- [ ] Search by tags/username
+- [ ] Trending threads
+- [ ] Categories/collections
+- [ ] Explore page
+
+### Phase 4 - Advanced Drawing
 - [ ] Time-lapse replay of drawings
-- [ ] Drawing version history
-- [ ] User authentication
-- [ ] Content moderation
-- [ ] iPad split-view UI (thread list + canvas)
-- [ ] Export to multiple formats (PNG, PDF, PencilKit data)
+- [ ] Custom brushes
+- [ ] Layer support
+- [ ] Export to multiple formats (PNG, PDF, etc.)
 
-## License
+### Phase 5 - Moderation & Safety
+- [ ] Content moderation (Cloud Functions)
+- [ ] Report system
+- [ ] Image SafeSearch integration
+- [ ] Block/mute users
 
-MIT License - feel free to use this as a starter for your own projects!
+### Phase 6 - Monetization
+- [ ] Premium brushes/tools
+- [ ] Art challenges with prizes
+- [ ] Artist marketplace
+- [ ] Ad-free experience
 
-## Contributing
+## 🔐 Security & Privacy
 
-This is an early-stage project. Feel free to open issues or submit pull requests!
+- All data is stored in Firebase with security rules
+- Users can only edit their own content
+- Images are stored in Cloud Storage with access control
+- Passwords are managed by Firebase Auth (never stored locally)
+
+## 📝 Contributing
+
+This is a personal project, but suggestions and feedback are welcome! Feel free to:
+- Open issues for bugs or feature requests
+- Submit pull requests for improvements
+- Share your ideas for new features
+
+## 📄 License
+
+MIT License - See LICENSE file for details
+
+## 🙏 Acknowledgments
+
+- Apple's PencilKit for amazing drawing capabilities
+- Firebase for backend infrastructure
+- The iOS developer community
 
 ---
 
-Built with ❤️ using SwiftUI and PencilKit
+Built with ❤️ using SwiftUI, PencilKit, and Firebase
+
+**Created by:** Jennifer Nelson  
+**GitHub:** [@jenjeep7](https://github.com/jenjeep7)

@@ -8,13 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var authManager: AuthenticationManager
+    
     var body: some View {
-        NavigationStack {
-            DrawingScreen()
+        Group {
+            if authManager.isAuthenticated {
+                FeedView()
+            } else {
+                AuthenticationView()
+            }
         }
     }
 }
 
 #Preview {
     ContentView()
+        .environmentObject(AuthenticationManager())
 }
