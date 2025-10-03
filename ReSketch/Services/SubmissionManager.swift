@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseFirestore
 import FirebaseStorage
+import FirebaseAuth
 import UIKit
 import PencilKit
 
@@ -26,16 +27,22 @@ class SubmissionManager: ObservableObject {
         errorMessage = nil
         
         do {
+            print("🔍 Fetching submissions for thread: \(threadID)")
             let snapshot = try await db.collection("submissions")
                 .whereField("threadID", isEqualTo: threadID)
                 .order(by: "createdAt", descending: true)
                 .getDocuments()
             
+            print("📦 Fetched \(snapshot.documents.count) submission documents")
+            
             submissions = snapshot.documents.compactMap { doc in
                 try? doc.data(as: Submission.self)
             }
             
+            print("✅ Successfully parsed \(submissions.count) submissions")
+            
         } catch {
+            print("❌ Error fetching submissions: \(error.localizedDescription)")
             errorMessage = error.localizedDescription
         }
         
@@ -54,9 +61,18 @@ class SubmissionManager: ObservableObject {
         errorMessage = nil
         
         do {
+            // Debug: Check authentication
+            if let currentUser = Auth.auth().currentUser {
+                print("✅ Submitting re-sketch as authenticated user: \(currentUser.uid)")
+            } else {
+                print("❌ WARNING: No authenticated user found during submission!")
+            }
+            
             // Upload image
+            print("📤 Uploading submission image...")
             let imageURL = try await uploadImage(image: image, path: "submissions")
             let thumbnailURL = try await uploadThumbnail(image: image, path: "thumbnails/submissions")
+            print("✅ Images uploaded successfully")
             
             // Optionally upload drawing data for replay
             var drawingDataURL: String?
@@ -80,16 +96,19 @@ class SubmissionManager: ObservableObject {
             )
             
             try submissionRef.setData(from: submission)
+            print("✅ Submission document created with ID: \(submissionRef.documentID)")
             
             // Update thread submission count
             try await db.collection("threads").document(threadID).updateData([
                 "submissionCount": FieldValue.increment(Int64(1))
             ])
+            print("✅ Thread submission count updated")
             
             // Update user's submission count
             try await db.collection("users").document(artistID).updateData([
                 "submissionCount": FieldValue.increment(Int64(1))
             ])
+            print("✅ Submission complete! Re-sketch submitted to thread: \(threadID)")
             
             isLoading = false
             return submission
