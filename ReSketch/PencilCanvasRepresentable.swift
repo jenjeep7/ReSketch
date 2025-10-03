@@ -36,8 +36,8 @@ struct PencilCanvasRepresentable: UIViewRepresentable {
         if let window = UIApplication.shared.connectedScenes
             .compactMap({ $0 as? UIWindowScene })
             .flatMap({ $0.windows })
-            .first(where: { $0.isKeyWindow }),
-           let toolPicker = PKToolPicker.shared(for: window) {
+            .first(where: { $0.isKeyWindow }) {
+            let toolPicker = PKToolPicker()
             toolPicker.addObserver(canvas)
             toolPicker.setVisible(true, forFirstResponder: canvas)
             canvas.becomeFirstResponder()
@@ -48,8 +48,7 @@ struct PencilCanvasRepresentable: UIViewRepresentable {
     func updateUIView(_ canvas: PKCanvasView, context: Context) {
         if canvas.drawing != drawing { canvas.drawing = drawing }
         canvas.drawingPolicy = isFingerDrawingEnabled ? .anyInput : .pencilOnly
-        if type(of: canvas.tool) != type(of: activeTool) || canvas.tool != activeTool {
-            canvas.tool = activeTool
-        }
+        // Update tool if it changed
+        canvas.tool = activeTool
     }
 }
