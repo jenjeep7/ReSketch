@@ -12,6 +12,7 @@
 		A1000005000000000000001 /* DrawingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000006000000000000001 /* DrawingScreen.swift */; };
 		A1000007000000000000001 /* PencilCanvasRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000008000000000000001 /* PencilCanvasRepresentable.swift */; };
 		A1000009000000000000001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1000010000000000000001 /* Assets.xcassets */; };
+		A1000030000000000000001 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1000031000000000000001 /* GoogleService-Info.plist */; };
 		A2000001000000000000001 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000002000000000000001 /* User.swift */; };
 		A2000003000000000000001 /* Thread.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000004000000000000001 /* Thread.swift */; };
 		A2000005000000000000001 /* Submission.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000006000000000000001 /* Submission.swift */; };
@@ -36,6 +37,7 @@
 		A1000008000000000000001 /* PencilCanvasRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PencilCanvasRepresentable.swift; sourceTree = "<group>"; };
 		A1000010000000000000001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1000011000000000000001 /* ReSketch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReSketch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1000031000000000000001 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A2000002000000000000001 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A2000004000000000000001 /* Thread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thread.swift; sourceTree = "<group>"; };
 		A2000006000000000000001 /* Submission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Submission.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				A3000010000000000000001 /* Services */,
 				A4000020000000000000001 /* Views */,
 				A1000010000000000000001 /* Assets.xcassets */,
+				A1000031000000000000001 /* GoogleService-Info.plist */,
 			);
 			path = ReSketch;
 			sourceTree = "<group>";
@@ -195,6 +198,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1000009000000000000001 /* Assets.xcassets in Resources */,
+				A1000030000000000000001 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
