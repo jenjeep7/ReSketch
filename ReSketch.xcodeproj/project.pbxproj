@@ -12,6 +12,18 @@
 		A1000005000000000000001 /* DrawingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000006000000000000001 /* DrawingScreen.swift */; };
 		A1000007000000000000001 /* PencilCanvasRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000008000000000000001 /* PencilCanvasRepresentable.swift */; };
 		A1000009000000000000001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1000010000000000000001 /* Assets.xcassets */; };
+		A2000001000000000000001 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000002000000000000001 /* User.swift */; };
+		A2000003000000000000001 /* Thread.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000004000000000000001 /* Thread.swift */; };
+		A2000005000000000000001 /* Submission.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000006000000000000001 /* Submission.swift */; };
+		A3000001000000000000001 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3000002000000000000001 /* AuthenticationManager.swift */; };
+		A3000003000000000000001 /* ThreadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3000004000000000000001 /* ThreadManager.swift */; };
+		A3000005000000000000001 /* SubmissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3000006000000000000001 /* SubmissionManager.swift */; };
+		A4000001000000000000001 /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4000002000000000000001 /* AuthenticationView.swift */; };
+		A4000003000000000000001 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4000004000000000000001 /* FeedView.swift */; };
+		A4000005000000000000001 /* ThreadDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4000006000000000000001 /* ThreadDetailView.swift */; };
+		A4000007000000000000001 /* CreateThreadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4000008000000000000001 /* CreateThreadView.swift */; };
+		A4000009000000000000001 /* CreateArtworkCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4000010000000000000001 /* CreateArtworkCanvas.swift */; };
+		A4000011000000000000001 /* ReSketchCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4000012000000000000001 /* ReSketchCanvasView.swift */; };
 		FB001001000000000000001 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = FB001002000000000000001 /* FirebaseAuth */; };
 		FB001003000000000000001 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = FB001004000000000000001 /* FirebaseFirestore */; };
 		FB001005000000000000001 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = FB001006000000000000001 /* FirebaseStorage */; };
@@ -24,6 +36,18 @@
 		A1000008000000000000001 /* PencilCanvasRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PencilCanvasRepresentable.swift; sourceTree = "<group>"; };
 		A1000010000000000000001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1000011000000000000001 /* ReSketch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReSketch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2000002000000000000001 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		A2000004000000000000001 /* Thread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thread.swift; sourceTree = "<group>"; };
+		A2000006000000000000001 /* Submission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Submission.swift; sourceTree = "<group>"; };
+		A3000002000000000000001 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
+		A3000004000000000000001 /* ThreadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadManager.swift; sourceTree = "<group>"; };
+		A3000006000000000000001 /* SubmissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionManager.swift; sourceTree = "<group>"; };
+		A4000002000000000000001 /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
+		A4000004000000000000001 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
+		A4000006000000000000001 /* ThreadDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadDetailView.swift; sourceTree = "<group>"; };
+		A4000008000000000000001 /* CreateThreadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateThreadView.swift; sourceTree = "<group>"; };
+		A4000010000000000000001 /* CreateArtworkCanvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateArtworkCanvas.swift; sourceTree = "<group>"; };
+		A4000012000000000000001 /* ReSketchCanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReSketchCanvasView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +79,9 @@
 				A1000004000000000000001 /* ContentView.swift */,
 				A1000006000000000000001 /* DrawingScreen.swift */,
 				A1000008000000000000001 /* PencilCanvasRepresentable.swift */,
+				A2000010000000000000001 /* Models */,
+				A3000010000000000000001 /* Services */,
+				A4000020000000000000001 /* Views */,
 				A1000010000000000000001 /* Assets.xcassets */,
 			);
 			path = ReSketch;
@@ -66,6 +93,39 @@
 				A1000011000000000000001 /* ReSketch.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		A2000010000000000000001 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A2000002000000000000001 /* User.swift */,
+				A2000004000000000000001 /* Thread.swift */,
+				A2000006000000000000001 /* Submission.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A3000010000000000000001 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A3000002000000000000001 /* AuthenticationManager.swift */,
+				A3000004000000000000001 /* ThreadManager.swift */,
+				A3000006000000000000001 /* SubmissionManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		A4000020000000000000001 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A4000002000000000000001 /* AuthenticationView.swift */,
+				A4000004000000000000001 /* FeedView.swift */,
+				A4000006000000000000001 /* ThreadDetailView.swift */,
+				A4000008000000000000001 /* CreateThreadView.swift */,
+				A4000010000000000000001 /* CreateArtworkCanvas.swift */,
+				A4000012000000000000001 /* ReSketchCanvasView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,6 +209,18 @@
 				A1000005000000000000001 /* DrawingScreen.swift in Sources */,
 				A1000007000000000000001 /* PencilCanvasRepresentable.swift in Sources */,
 				A1000001000000000000001 /* ReSketchApp.swift in Sources */,
+				A2000001000000000000001 /* User.swift in Sources */,
+				A2000003000000000000001 /* Thread.swift in Sources */,
+				A2000005000000000000001 /* Submission.swift in Sources */,
+				A3000001000000000000001 /* AuthenticationManager.swift in Sources */,
+				A3000003000000000000001 /* ThreadManager.swift in Sources */,
+				A3000005000000000000001 /* SubmissionManager.swift in Sources */,
+				A4000001000000000000001 /* AuthenticationView.swift in Sources */,
+				A4000003000000000000001 /* FeedView.swift in Sources */,
+				A4000005000000000000001 /* ThreadDetailView.swift in Sources */,
+				A4000007000000000000001 /* CreateThreadView.swift in Sources */,
+				A4000009000000000000001 /* CreateArtworkCanvas.swift in Sources */,
+				A4000011000000000000001 /* ReSketchCanvasView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
