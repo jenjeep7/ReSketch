@@ -120,18 +120,40 @@ ReSketch/
    - Select: FirebaseAuth, FirebaseFirestore, FirebaseStorage
 
 3. **Configure Firebase**
-   - Follow instructions in `FIREBASE_SETUP.md`
+   - Create a Firebase project at [Firebase Console](https://console.firebase.google.com/)
+   - Enable Email/Password authentication
+   - Create Firestore database and deploy rules from `firestore.rules`
+   - Enable Cloud Storage and deploy rules from `storage.rules`
+   - Create Firestore index for submissions (see below)
    - Download `GoogleService-Info.plist` from Firebase Console
-   - Add it to the Xcode project
+   - **IMPORTANT**: Place it in the `ReSketch/` folder (same level as `ReSketchApp.swift`)
+   - **⚠️ NEVER commit this file to git** - it contains sensitive API keys
 
-4. **Update Bundle Identifier**
+4. **Create Firestore Index**
+   - Go to Firestore → Indexes
+   - Create composite index for `submissions` collection:
+     - `threadID` (Ascending)
+     - `createdAt` (Descending)
+   - Or click the auto-generated link when the app requests it
+
+5. **Update Bundle Identifier**
    - Select the ReSketch target
-   - Update Bundle Identifier to match your Firebase project
+   - Update Bundle Identifier to match your Firebase project (e.g., `com.resketch.app`)
    - Select your development team
 
-5. **Build and Run**
+6. **Build and Run**
    - Select an iPad simulator or device (recommended)
    - Press ⌘R to build and run
+
+### ⚠️ Security Note
+
+The `GoogleService-Info.plist` file is **excluded from version control** via `.gitignore` because it contains sensitive API keys. 
+
+**If you accidentally committed it:**
+1. Remove from git: `git rm --cached ReSketch/GoogleService-Info.plist`
+2. Commit the removal: `git commit -m "Remove sensitive config"`
+3. **Rotate your API keys** in Firebase Console
+4. Download a new `GoogleService-Info.plist`
 
 ## 📱 User Flow
 
