@@ -99,6 +99,13 @@ class ThreadManager: ObservableObject {
         let filename = "\(UUID().uuidString).jpg"
         let ref = storage.reference().child("\(path)/\(filename)")
         
+        // Debug: Check if we're authenticated
+        if let currentUser = Auth.auth().currentUser {
+            print("✅ Uploading as authenticated user: \(currentUser.uid)")
+        } else {
+            print("❌ WARNING: No authenticated user found!")
+        }
+        
         _ = try await ref.putDataAsync(imageData)
         let url = try await ref.downloadURL()
         return url.absoluteString
